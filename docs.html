@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vistora Documentation — Setup, Shortcuts, Export Presets & Troubleshooting</title>
+<meta name="description" content="Official Vistora docs: system requirements, project setup, vertical reframe workflow, Script Studio, AI Dialogue Studio, keyboard shortcuts and export presets for YouTube, TikTok and Instagram Reels.">
+<meta name="keywords" content="vistora documentation, video editor keyboard shortcuts, export preset tiktok youtube instagram, video editor setup guide, local video editor requirements">
+<link rel="canonical" href="https://vistora.thestreamic.in/docs.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="The Streamic">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Vistora">
+<meta property="og:title" content="Vistora Documentation — Setup, Shortcuts, Export Presets & Troubleshooting">
+<meta property="og:description" content="Official Vistora docs: system requirements, project setup, vertical reframe workflow, Script Studio, AI Dialogue Studio, keyboard shortcuts and export presets for YouTube, TikTok and Instagram Reels.">
+<meta property="og:url" content="https://vistora.thestreamic.in/docs.html">
+<meta property="og:image" content="https://vistora.thestreamic.in/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vistora Documentation — Setup, Shortcuts, Export Presets & Troubleshooting">
+<meta name="twitter:description" content="Official Vistora docs: system requirements, project setup, vertical reframe workflow, Script Studio, AI Dialogue Studio, keyboard shortcuts and export presets for YouTube, TikTok and Instagram Reels.">
+<meta name="twitter:image" content="https://vistora.thestreamic.in/assets/og-cover.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Vistora upload my video to the cloud?", "acceptedAnswer": {"@type": "Answer", "text": "No. Vistora processes video, audio and AI dialogue enhancement locally on your device during normal editing, reframing and export."}}, {"@type": "Question", "name": "Do I need a GPU to run Vistora?", "acceptedAnswer": {"@type": "Answer", "text": "No. Vistora is designed to run on CPU-only hardware, including laptops without a discrete graphics card."}}, {"@type": "Question", "name": "How do I reframe 16:9 footage to 9:16 for social media?", "acceptedAnswer": {"@type": "Answer", "text": "Open the clip on the Program monitor, enable the live 9:16 guide, and drag it to choose the crop. The reframe can be keyframed and previews instantly without creating a duplicate timeline."}}, {"@type": "Question", "name": "Is Vistora free to use?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Vistora is free to download and use during its public beta."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://vistora.thestreamic.in/index.html"}, {"@type": "ListItem", "position": 2, "name": "Vistora Documentation", "item": "https://vistora.thestreamic.in/docs.html"}]}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="pre-top"><main style="padding:0;display:flex;justify-content:space-between;align-items:center">
+  <a href="https://thestreamic.in" class="pre-top-link">The Streamic <span>— broadcast &amp; media technology</span></a>
+  <a href="mailto:thestreamic@gmail.com" class="pre-top-link pre-top-mail">thestreamic@gmail.com</a>
+</main></div>
+<header class="top">
+  <div class="brand"><a href="index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit"><span class="mark"></span><b>VISTORA</b></a></div>
+  <div class="nav-wrap">
+    <nav>
+      <a href="index.html" >Home</a>
+      <a href="features.html" >Features</a>
+      <a href="docs.html" class="active" style="color:var(--text)">Docs</a>
+      <a href="download.html" >Download</a>
+      <a href="contact.html" >Contact</a>
+    </nav>
+  </div>
+  <a href="https://github.com/thestreamic/vistora/releases/latest" class="btn btn-primary top-cta"><span>Download</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg></a>
+</header>
+
+<main>
+  <div class="page-hero"><span class="eyebrow">Documentation</span><h1>Everything you need to run Vistora</h1><p class="lede">Setup, project workflow, keyboard shortcuts and troubleshooting for the 0.9.0 Beta.</p></div>
+  <div class="docs-wrap">
+    <nav class="docs-nav">
+      <div class="grp">Start</div>
+      <a href="#getting-started">Getting started</a>
+      <a href="#system-requirements">System requirements</a>
+      <a href="#projects">Projects &amp; files</a>
+      <div class="grp">Editing</div>
+      <a href="#vertical-reframe">Vertical reframe</a>
+      <a href="#script-studio">Script Studio</a>
+      <a href="#dialogue-studio">AI Dialogue Studio</a>
+      <div class="grp">Reference</div>
+      <a href="#shortcuts">Keyboard shortcuts</a>
+      <a href="#export">Export presets</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="docs-body">
+      <h2 id="getting-started">Getting started</h2>
+      <p>Download the latest Windows build from <a href="download.html">the download page</a>, run the installer, then launch Vistora. On first run you can create a new project or open a recent one from the Project intelligence screen.</p>
+
+      <h2 id="system-requirements">System requirements</h2>
+      <table><tr><th>Component</th><th>Minimum</th></tr>
+      <tr><td>OS</td><td>Windows 10/11, 64-bit</td></tr>
+      <tr><td>CPU</td><td>4-core, e.g. Intel Core i5</td></tr>
+      <tr><td>RAM</td><td>8&nbsp;GB (16&nbsp;GB recommended)</td></tr>
+      <tr><td>GPU</td><td>Not required — Vistora runs on CPU-only hardware</td></tr>
+      <tr><td>Storage</td><td>2&nbsp;GB free, plus space for proxies</td></tr></table>
+
+      <h2 id="projects">Projects &amp; files</h2>
+      <p>Vistora saves projects as portable <code>.vistora.json</code> files. Autosave activates after your first manual save. Media is referenced, not copied — keep source files in place, or use Smart Relink if you move them.</p>
+
+      <h2 id="vertical-reframe">Vertical reframe</h2>
+      <p>Select a clip on Program, open the reframe panel, and drag the live 9:16 guide. Enable manual reframe to keyframe the crop position across a move — the reframe is stored with the clip, so no duplicate vertical sequence is needed.</p>
+
+      <h2 id="script-studio">Script Studio</h2>
+      <p>Transcribe a clip, then click any line to jump to that timecode. Select lines to Mark I/O or make a subclip, and export or import <code>.srt</code> at any point.</p>
+
+      <h2 id="dialogue-studio">AI Dialogue Studio</h2>
+      <p>Mark a quiet, noise-only section of a clip for best results, then choose Enhance Voice. Compare Original and Enhanced playback before committing, and pick a Social, Podcast or Broadcast output target on export.</p>
+
+      <h2 id="shortcuts">Keyboard shortcuts</h2>
+      <table><tr><th>Action</th><th>Shortcut</th></tr>
+      <tr><td>Mark In / Out</td><td>I / O</td></tr>
+      <tr><td>Insert / Overwrite</td><td>, / .</td></tr>
+      <tr><td>Blade tool</td><td>B</td></tr>
+      <tr><td>Undo / Redo</td><td>Ctrl+Z / Ctrl+Y</td></tr>
+      <tr><td>Toggle 9:16 preview</td><td>Shift+V</td></tr></table>
+
+      <h2 id="export">Export presets</h2>
+      <p>20 named delivery presets are built in across Facebook, YouTube, TikTok and Instagram Reels, with correct BT.709 metadata for standard delivery.</p>
+
+      <h2 id="troubleshooting">Troubleshooting</h2>
+      <p>Most playback stutter is resolved by generating proxies for 4K source media. If a project won't open, confirm the <code>.vistora.json</code> file wasn't edited outside Vistora. For anything else, <a href="contact.html">contact support</a> or <a href="https://github.com/thestreamic/vistora/issues">file an issue on GitHub</a>.</p>
+
+      <h2 id="faq">Frequently asked questions</h2>
+      <p><b>Does Vistora upload my video to the cloud?</b><br>No. Vistora processes video, audio and AI dialogue enhancement locally on your device during normal editing, reframing and export.</p>
+      <p><b>Do I need a GPU to run Vistora?</b><br>No. Vistora is designed to run on CPU-only hardware, including laptops without a discrete graphics card.</p>
+      <p><b>How do I reframe 16:9 footage to 9:16 for social media?</b><br>Open the clip on the Program monitor, enable the live 9:16 guide, and drag it to choose the crop. The reframe can be keyframed and previews instantly without creating a duplicate timeline.</p>
+      <p><b>Is Vistora free to use?</b><br>Yes, Vistora is free to download and use during its public beta.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer"><main style="padding-bottom:0">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand"><span class="mark"></span><b>VISTORA</b></div>
+      <p>A browser-first, local video editor for creators who deliver to every platform from one timeline.</p>
+      <a class="footer-parent" href="https://thestreamic.in">
+        <span class="fp-dot"></span>An independent product by <b>The Streamic</b>
+      </a>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="fh">Product</div>
+        <a href="features.html">Features</a>
+        <a href="download.html">Download</a>
+        <a href="https://github.com/thestreamic/vistora/releases/latest">Release notes</a>
+        <a href="docs.html">Documentation</a>
+      </div>
+      <div class="footer-col">
+        <div class="fh">Resources</div>
+        <a href="docs.html#getting-started">Getting started</a>
+        <a href="docs.html#troubleshooting">Troubleshooting</a>
+        <a href="https://github.com/thestreamic/vistora/issues">Report an issue</a>
+        <a href="contact.html">Contact us</a>
+      </div>
+      <div class="footer-col">
+        <div class="fh">Company</div>
+        <a href="https://thestreamic.in">thestreamic.in</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms of use</a>
+        <a href="mailto:thestreamic@gmail.com">thestreamic@gmail.com</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="fb-tc">© 2026 The Streamic <span class="fb-sep">/</span> Vistora 0.9.0 &ldquo;Aurora&rdquo; Beta</span>
+    <span class="fb-links"><a href="https://github.com/thestreamic/vistora">GitHub</a><span class="fb-sep">/</span><a href="privacy.html">Privacy</a><span class="fb-sep">/</span><a href="terms.html">Terms</a></span>
+  </div>
+</main></footer>
+</body>
+</html>
