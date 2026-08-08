@@ -1,19 +1,22 @@
-# Vistora
+# Vistora marketing site
 
-Vistora is a fast, privacy-first desktop video editor built for YouTubers and content creators.
+Single homepage combining the existing hero (playable 9:16 reframe demo) with the full features inventory.
 
-Edit long-form videos, Shorts, Reels, tutorials, podcasts, and social content with multi-track timelines, proxy workflows, PiP editing, and professional exports.
+Operator docs (detailed how-tos + screenshots): `../docs/USER_GUIDE.md`, `../docs/USER_GUIDE.txt`, `../docs/FEATURES.txt`.
 
-## Features
+## Open locally
 
-- Multi-track video editing
-- PiP (Picture-in-Picture)
-- Proxy workflows
-- 9:16 vertical video editing
-- Shorts & Reels production
-- Hardware accelerated exports
-- Privacy-first local processing
+```bat
+node website\serve.cjs
+```
 
-## Website
+Then open http://127.0.0.1:8765/
 
-Coming soon: https://vistora.thestreamic.in
+## Assets
+
+| File | Role |
+|------|------|
+| `assets/vistora-reframe.webm` | Hero demo (playable) |
+| `assets/vistora-reframe-poster.webp` | Hero poster |
+| `assets/ug-*.png` | Product stills from User Guide captures |
+| `assets/vistora-icon.png` | Brand mark |

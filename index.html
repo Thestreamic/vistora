@@ -3,195 +3,1187 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vistora — Free Local Video Editor | Automatic Reframe, Captions, Noise Cancellation</title>
-<meta name="description" content="Vistora is a free, local-first video editor. Automatic 16:9 to 9:16 reframe, caption-based editing, noise cancellation — no upload, no account. Free during public beta.">
-<script src="https://cdn.tailwindcss.com"></script>
+<title>Vistora — Free Local NLE for 16:9→9:16 Reframe | Windows</title>
+<meta name="description" content="Vistora Limited Creator Edition — completely free (beta). Local Windows NLE: automatic 16:9→9:16 reframe, caption-based editing, noise cancellation, and Fast Export. No upload, no account.">
+<link rel="icon" href="assets/vistora-icon.png" type="image/png">
+<link rel="canonical" href="https://vistora.thestreamic.in/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vistora">
+<meta property="og:title" content="Vistora — Free local NLE. Reframe 16:9 to 9:16 instantly.">
+<meta property="og:description" content="Local Windows video editor with automatic vertical reframe, transcript editing, and noise cancellation. Completely free (beta).">
+<meta property="og:image" content="assets/vistora-reframe-poster.webp">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Vistora",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Windows",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Local Windows NLE with automatic 16:9 to 9:16 reframe, caption-based editing, noise cancellation, and Fast Export. Limited Creator Edition — completely free (beta).",
+  "url": "https://vistora.thestreamic.in/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Streamic",
+    "url": "https://www.thestreamic.in/"
+  },
+  "isAccessibleForFree": true
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Vistora?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vistora is a local Windows video editor (NLE) for creators with automatic 16:9 to 9:16 reframe, caption-based editing, noise cancellation, and Fast Export without uploading media."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Vistora free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Limited Creator Edition is completely free (beta) with no account and no watermark."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Vistora work offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Editing, transcription, dialogue enhance, and export run locally. Internet is only needed to download the app."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Vistora good for YouTube Shorts and Reels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. One-click vertical reframe plus social export presets for Shorts, Instagram Reels/Feed, YouTube, and Facebook."
+      }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
-  
-  body { 
-    font-family: 'Inter', sans-serif; 
-    background-color: #050505; 
-    color: #ffffff; 
-    overflow-x: hidden; 
+@font-face{
+  font-family:"Space Grotesk Local";
+  src:url("assets/SpaceGrotesk.woff2") format("woff2");
+  font-weight:400 700;
+  font-display:swap;
+}
+:root{
+  /* Premium deep stage — richer black with violet/crimson depth */
+  --bg:#030208;
+  --bg-deep:#010105;
+  --bg-elev:#0E0C14;
+  --bg-panel:#09070F;
+  --ink:#FFFFFF;
+  --muted:rgba(220,224,236,.55);
+  --dim:rgba(220,224,236,.34);
+  --line:rgba(255,255,255,.065);
+  --line-strong:rgba(255,255,255,.12);
+  --violet:#9B7BFF;
+  --cyan:#3DE0FF;
+  --crimson:#C43B5A;
+  --maya-teal:#2EC4B6;
+  --coral:#FF6B4A;
+  --grad:linear-gradient(135deg,#7C5CFF 0%,#3DE0FF 55%,#7CFFB2 100%);
+  --grad-text:linear-gradient(100deg,#F7F3FF 0%,#C4B0FF 36%,#9B7BFF 58%,#3DE0FF 100%);
+  --display:"Bricolage Grotesque","Space Grotesk Local",system-ui,sans-serif;
+  --sans:"Manrope",system-ui,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-soft:cubic-bezier(.19,1,.22,1);
+  --max:1520px;
+  --rim-rv:#C43B5A;
+  --rim-rv-soft:rgba(196,59,90,.10);
+  --shade:rgba(1,1,5,.65);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:
+    radial-gradient(920px 600px at 12% -10%, rgba(124,92,255,.11), transparent 55%),
+    radial-gradient(700px 480px at 82% 6%, rgba(196,59,90,.08), transparent 52%),
+    radial-gradient(640px 440px at 28% 72%, rgba(80,30,70,.09), transparent 58%),
+    radial-gradient(780px 520px at 94% 88%, rgba(61,224,255,.04), transparent 50%),
+    linear-gradient(180deg,#07050C 0%,#030208 38%,#020106 100%);
+  background-attachment:fixed;
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-optical-sizing:auto;
+  font-feature-settings:"ss01" on,"kern" on;
+  letter-spacing:.005em;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{width:min(100% - 48px,var(--max));margin-inline:auto}
+@media(max-width:640px){.wrap{width:min(100% - 32px,var(--max))}}
+
+/* Cinematic atmosphere — Maya/NLE viewport stage */
+.atmosphere{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+.atmosphere .mesh{
+  position:absolute;inset:-20%;
+  background:
+    conic-gradient(from 210deg at 30% 20%, rgba(124,92,255,.09), transparent 26%, rgba(196,59,90,.07) 44%, transparent 58%, rgba(61,224,255,.04) 74%, transparent 90%),
+    radial-gradient(ellipse 50% 40% at 50% 0%, rgba(255,255,255,.028), transparent 70%);
+  filter:blur(52px);
+  animation:meshDrift 36s ease-in-out infinite alternate;
+}
+.atmosphere .orb{
+  position:absolute;border-radius:50%;filter:blur(110px);opacity:.58;
+  animation:orbFloat 24s ease-in-out infinite;
+}
+.atmosphere .a{top:-12%;left:-8%;width:50%;height:50%;background:rgba(92,70,200,.16);animation-delay:0s}
+.atmosphere .b{bottom:-18%;right:-12%;width:46%;height:46%;background:rgba(30,140,180,.08);animation-delay:-6s}
+.atmosphere .c{top:38%;left:42%;width:26%;height:26%;background:rgba(196,59,90,.07);animation-delay:-11s;filter:blur(110px)}
+.atmosphere .d{
+  top:10%;left:8%;width:32%;height:38%;
+  background:rgba(160,50,110,.10);
+  animation-delay:-3s;filter:blur(100px);opacity:.55;
+}
+.atmosphere .beam{
+  position:absolute;top:-20%;left:35%;
+  width:28%;height:140%;
+  background:linear-gradient(105deg, transparent 0%, rgba(124,92,255,.028) 40%, rgba(196,59,90,.035) 52%, transparent 72%);
+  transform:rotate(18deg);
+  filter:blur(34px);
+  animation:beamSweep 18s ease-in-out infinite alternate;
+  opacity:.5;
+}
+.atmosphere .horizon{
+  position:absolute;left:0;right:0;top:42%;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(196,59,90,.055), rgba(124,92,255,.06), transparent);
+  box-shadow:0 0 36px rgba(124,92,255,.04);
+  animation:horizonPulse 10s ease-in-out infinite;
+}
+.atmosphere .grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.014) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 68% 55% at 50% 28%, #030208 8%, transparent 72%);
+  opacity:.28;
+  animation:gridDrift 48s linear infinite;
+}
+.atmosphere .grain{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity:.065;mix-blend-mode:overlay;
+}
+.atmosphere .dot-field{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(ellipse 65% 55% at 50% 30%, #000 15%, transparent 75%);
+  opacity:.45;
+}
+.atmosphere .vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 68% 62% at 50% 36%, transparent 28%, rgba(1,1,5,.72) 100%);
+}
+@keyframes meshDrift{
+  from{transform:translate3d(-2%,-1%,0) rotate(0deg) scale(1)}
+  to{transform:translate3d(3%,2%,0) rotate(3deg) scale(1.05)}
+}
+@keyframes orbFloat{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(3%,-4%,0) scale(1.07)}
+}
+@keyframes beamSweep{
+  from{transform:rotate(16deg) translateX(-6%)}
+  to{transform:rotate(20deg) translateX(8%)}
+}
+@keyframes horizonPulse{
+  0%,100%{opacity:.35}
+  50%{opacity:.85}
+}
+@keyframes gridDrift{
+  from{background-position:0 0,0 0}
+  to{background-position:80px 40px,40px 80px}
+}
+
+/* NAV — brand scale-up (structure preserved) */
+.site-nav{
+  position:relative;z-index:30;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:28px max(24px,calc((100vw - var(--max))/2));
+}
+.brand{
+  display:flex;align-items:center;gap:14px;text-decoration:none;
+}
+.brand-mark{
+  width:42px;height:42px;border-radius:12px;
+  background:var(--grad);box-shadow:0 12px 40px -10px rgba(124,92,255,.55);
+  transition:transform .35s var(--ease);
+  object-fit:cover;
+}
+.brand:hover .brand-mark{transform:scale(1.06)}
+.brand-word{
+  font-family:var(--display);
+  font-weight:800;font-size:1.4rem;letter-spacing:.22em;text-transform:uppercase;
+  background:linear-gradient(180deg,#fff 22%,rgba(255,255,255,.78));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  font-optical-sizing:auto;
+}
+.nav-links{display:flex;gap:22px;align-items:center;font-size:10px;text-transform:uppercase;letter-spacing:.18em;font-weight:650;color:rgba(255,255,255,.42);flex-wrap:wrap;justify-content:center}
+.nav-links a{text-decoration:none;transition:color .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.is-active{color:#fff}
+.nav-links .nav-sep{width:1px;height:12px;background:rgba(255,255,255,.14);flex:none}
+.nav-cta{
+  padding:12px 24px;border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-weight:700;text-decoration:none;
+  background:rgba(255,255,255,.03);backdrop-filter:blur(12px);
+  transition:background .25s,color .25s,border-color .25s,box-shadow .25s;
+  flex:none;
+}
+.nav-cta:hover{background:#fff;color:var(--bg);border-color:#fff;box-shadow:0 0 28px rgba(58,215,240,.18)}
+.nav-toggle{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;border:1px solid rgba(255,255,255,.18);border-radius:10px;
+  background:rgba(255,255,255,.03);cursor:pointer;padding:10px;
+}
+.nav-toggle span{display:block;height:2px;background:rgba(255,255,255,.75);border-radius:2px;transition:transform .25s,opacity .25s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-mob{
+  display:none;position:absolute;left:16px;right:16px;top:calc(100% - 4px);z-index:40;
+  padding:16px;border-radius:16px;border:1px solid var(--line-strong);
+  background:rgba(3,2,8,.97);backdrop-filter:blur(20px);
+  box-shadow:0 24px 60px -20px rgba(1,1,5,.85);
+  flex-direction:column;gap:4px;
+}
+.nav-mob.open{display:flex}
+.nav-mob a{
+  display:block;padding:12px 14px;border-radius:10px;text-decoration:none;
+  font-size:12px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+}
+.nav-mob a:hover,.nav-mob a.is-active{color:#fff;background:rgba(255,255,255,.05)}
+.nav-mob .nav-mob-cta{
+  margin-top:8px;text-align:center;background:#fff;color:var(--bg);font-weight:800;
+}
+@media(max-width:1100px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+}
+@media(max-width:820px){
+  .site-nav{padding:20px 16px}
+}
+
+/* HERO — DCC product composition */
+.hero{
+  position:relative;z-index:10;
+  display:grid;grid-template-columns:.92fr 1.18fr;gap:56px;
+  align-items:center;
+  width:min(100% - 40px,var(--max));margin:0 auto;
+  padding:36px 0 72px;
+}
+.hero-copy{
+  position:relative;
+  isolation:isolate;
+}
+.hero-copy::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:-8%;left:-12%;
+  width:78%;height:72%;
+  background:
+    radial-gradient(ellipse 55% 45% at 42% 38%, rgba(196,59,90,.10), transparent 70%),
+    radial-gradient(ellipse 40% 35% at 55% 55%, rgba(124,92,255,.10), transparent 72%);
+  filter:blur(28px);
+  pointer-events:none;
+}
+.hero-copy::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:0;bottom:4%;
+  width:min(420px,90%);height:88px;
+  background:radial-gradient(ellipse 70% 80% at 40% 50%, rgba(196,59,90,.08), transparent 72%);
+  filter:blur(22px);
+  pointer-events:none;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:999px;
+  background:linear-gradient(135deg,rgba(124,92,255,.14),rgba(196,59,90,.07));
+  border:1px solid rgba(155,123,255,.32);
+  color:#d4c6ff;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  box-shadow:0 0 32px rgba(124,92,255,.10) inset;
+  opacity:0;transform:translateY(14px);
+  transition:opacity 1.15s var(--ease-soft),transform 1.15s var(--ease-soft);
+}
+.hero-copy.is-in .badge{opacity:1;transform:none;transition-delay:.18s}
+.badge .beta-whisper{
+  color:rgba(212,198,255,.45);font-weight:600;letter-spacing:.08em;text-transform:lowercase;
+  font-size:9px;
+}
+.hero-diff{
+  margin-top:14px;max-width:28rem;
+  font-size:clamp(.92rem,1.2vw,1.05rem);font-weight:500;line-height:1.55;
+  color:rgba(196,180,255,.78);letter-spacing:.02em;
+  opacity:0;transform:translateY(12px);
+  transition:opacity 1.15s var(--ease-soft),transform 1.15s var(--ease-soft);
+}
+.hero-copy.is-in .hero-diff{opacity:1;transform:none;transition-delay:.95s}
+
+/* Smooth pro-tool headline cadence (slower = premium) */
+.hero h1{
+  margin-top:22px;
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(3.55rem,9.4vw,7.15rem);
+  line-height:.86;letter-spacing:-.048em;text-transform:uppercase;
+  text-wrap:balance;
+  font-optical-sizing:auto;
+  font-feature-settings:"ss01" on,"kern" on;
+  text-shadow:0 1px 0 rgba(0,0,0,.35);
+}
+.hero h1 .ht-line{
+  display:block;
+  overflow:hidden;
+}
+.hero h1 .ht-inner{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(108%);
+  filter:blur(8px);
+  transition:
+    opacity 1.45s var(--ease-soft),
+    transform 1.45s var(--ease-soft),
+    filter 1.45s var(--ease-soft);
+  will-change:transform,opacity,filter;
+}
+.hero-copy.is-in .ht-inner{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+}
+.hero-copy.is-in .ht-line:nth-child(1) .ht-inner{transition-delay:.42s}
+.hero-copy.is-in .ht-line:nth-child(2) .ht-inner{transition-delay:.78s}
+.hero-copy.is-in .ht-line:nth-child(3) .ht-inner{transition-delay:1.14s}
+.hero h1 .ghost{
+  color:transparent;
+  -webkit-text-stroke:1.15px rgba(255,255,255,.38);
+  paint-order:stroke fill;
+  font-style:normal;
+}
+.hero-copy.is-in .ghost{
+  animation:ghostBreath 5.5s ease-in-out 2.4s infinite;
+}
+.hero h1 .grad{
+  background:var(--grad-text);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 32px rgba(155,123,255,.26));
+}
+.hero-copy.is-in .grad{
+  animation:gradShimmer 7s ease-in-out 2.6s infinite;
+}
+@keyframes ghostBreath{
+  0%,100%{-webkit-text-stroke-color:rgba(255,255,255,.34);filter:drop-shadow(0 0 6px rgba(124,92,255,.05))}
+  50%{-webkit-text-stroke-color:rgba(255,255,255,.48);filter:drop-shadow(0 0 14px rgba(124,92,255,.12))}
+}
+@keyframes gradShimmer{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.hero-lead{
+  margin-top:26px;max-width:30rem;
+  font-size:clamp(1.06rem,1.45vw,1.28rem);font-weight:400;line-height:1.72;color:var(--muted);
+  letter-spacing:.01em;
+  opacity:0;transform:translateY(18px);
+  transition:opacity 1.25s var(--ease-soft),transform 1.25s var(--ease-soft);
+}
+.hero-copy.is-in .hero-lead{opacity:1;transform:none;transition-delay:1.45s}
+.hero-lead em{
+  font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(255,255,255,.88);
+}
+.hero-actions{
+  display:flex;flex-wrap:wrap;gap:16px;margin-top:28px;
+  opacity:0;transform:translateY(18px);
+  transition:opacity 1.25s var(--ease-soft),transform 1.25s var(--ease-soft);
+}
+.hero-copy.is-in .hero-actions{opacity:1;transform:none;transition-delay:1.7s}
+.btn-solid{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:18px 32px;background:#fff;color:var(--bg);
+  font-family:var(--display);
+  font-size:11.5px;font-weight:750;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
+  box-shadow:
+    0 18px 44px -14px rgba(124,92,255,.3),
+    0 0 24px -10px rgba(196,59,90,.16);
+  border-radius:3px;
+  transition:background .25s,color .25s,transform .28s var(--ease),box-shadow .28s;
+}
+.btn-solid:hover{
+  background:linear-gradient(135deg,var(--violet),var(--cyan));color:var(--bg-deep);
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 22px 52px -12px rgba(61,224,255,.32),0 8px 24px -8px rgba(124,92,255,.35);
+}
+.btn-ghost{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:18px 32px;border:1px solid rgba(255,255,255,.2);
+  font-family:var(--display);
+  font-size:11.5px;font-weight:750;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
+  border-radius:3px;background:rgba(255,255,255,.025);
+  transition:background .25s,border-color .25s,box-shadow .28s,transform .28s var(--ease);
+}
+.btn-ghost:hover{
+  background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.45);
+  transform:translateY(-2px) scale(1.015);
+  box-shadow:0 12px 32px -16px rgba(255,255,255,.2);
+}
+.hero-stats{
+  display:flex;gap:40px;margin-top:36px;padding-top:28px;border-top:1px solid var(--line);width:100%;
+  opacity:0;transform:translateY(16px);
+  transition:opacity 1.25s var(--ease-soft),transform 1.25s var(--ease-soft);
+}
+.hero-copy.is-in .hero-stats{opacity:1;transform:none;transition-delay:1.95s}
+.hero-stats strong{display:block;font-family:var(--display);font-size:1.7rem;font-weight:800;margin-bottom:6px;letter-spacing:-.02em}
+.hero-stats span{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.2em;font-weight:700}
+
+.preview-col{
+  display:flex;justify-content:flex-end;
+  opacity:0;transform:translateY(32px) scale(.985);
+  transition:opacity 1.55s var(--ease-soft),transform 1.55s var(--ease-soft);
+}
+.hero.is-in .preview-col{opacity:1;transform:none;transition-delay:.85s}
+.glass-card{
+  width:100%;max-width:828px;
+  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015) 45%,rgba(139,124,255,.04));
+  backdrop-filter:blur(28px) saturate(130%);-webkit-backdrop-filter:blur(28px) saturate(130%);
+  border:1px solid var(--line-strong);
+  box-shadow:
+    0 50px 100px -28px rgba(5,6,10,.75),
+    0 0 0 1px rgba(255,255,255,.035) inset,
+    0 0 60px -22px rgba(139,124,255,.2);
+  border-radius:24px;padding:30px;position:relative;
+  transition:box-shadow .45s var(--ease),transform .45s var(--ease);
+}
+.glass-card.is-hot{
+  box-shadow:
+    0 50px 100px -28px rgba(5,6,10,.75),
+    0 0 0 1px rgba(255,255,255,.05) inset,
+    0 0 80px -16px rgba(155,123,255,.35),
+    0 0 40px -12px rgba(196,59,90,.18);
+  transform:translateY(-2px);
+}
+.glass-card::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,255,255,.1),transparent 35%,transparent 65%,rgba(58,215,240,.04));
+  opacity:.65;
+}
+@media (prefers-reduced-motion: reduce){
+  .atmosphere .mesh,.atmosphere .orb,.atmosphere .beam,.atmosphere .horizon,.atmosphere .grid{animation:none !important}
+  .tracks .t1::after,.tracks .t2::after,.tracks .t3::after,.tracks .playhead{animation:none !important}
+  .hero h1 .ht-inner,.badge,.hero-lead,.hero-diff,.hero-actions,.hero-stats,.preview-col{
+    opacity:1 !important;transform:none !important;filter:none !important;transition:none !important;
   }
-  
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  }
-  
-  .text-gradient {
-    background: linear-gradient(90deg, #A78BFA, #22D3EE);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .bg-gradient-btn {
-    background: linear-gradient(135deg, #8B5CF6, #06B6D4);
-  }
+  .hero-copy.is-in .ghost,.hero-copy.is-in .grad{animation:none !important}
+  .btn-solid:hover,.btn-ghost:hover{transform:none}
+}
+.glass-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;position:relative;z-index:1}
+.dots{display:flex;gap:8px}
+.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.dots .r{background:rgba(239,68,68,.5)}.dots .y{background:rgba(234,179,8,.5)}.dots .g{background:rgba(34,197,94,.5)}
+.proj-name{font-size:10px;color:rgba(255,255,255,.34);font-family:ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase}
+.video-stage{
+  position:relative;width:100%;aspect-ratio:16/9;z-index:1;
+  background:var(--bg-panel);border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 20px 50px -20px rgba(5,6,10,.7), 0 0 36px -18px rgba(58,215,240,.08);
+}
+.video-stage img,.video-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s}
+#vHeroPoster{opacity:1}
+#vHeroVideo{opacity:0}
+.video-stage .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,6,10,.52),transparent 45%);pointer-events:none}
+#vHeroPlayBtn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:76px;height:76px;border-radius:50%;border:1px solid rgba(255,255,255,.24);
+  background:rgba(255,255,255,.07);backdrop-filter:blur(18px);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;
+  transition:transform .3s var(--ease),box-shadow .3s,opacity .35s;
+  box-shadow:0 0 0 0 rgba(58,215,240,.22);
+  animation:pulseRing 3.2s ease-out infinite;
+}
+#vHeroPlayBtn.auto-on{
+  opacity:0;animation:none;
+}
+.video-stage:hover #vHeroPlayBtn.auto-on,
+#vHeroPlayBtn.auto-on:focus-visible{
+  opacity:1;
+}
+#vHeroPlayBtn:hover{transform:translate(-50%,-50%) scale(1.06)}
+@keyframes pulseRing{
+  0%{box-shadow:0 0 0 0 rgba(58,215,240,.3)}
+  70%{box-shadow:0 0 0 22px rgba(58,215,240,0)}
+  100%{box-shadow:0 0 0 0 rgba(58,215,240,0)}
+}
+.i-play{width:0;height:0;border-style:solid;border-width:9px 0 9px 16px;border-color:transparent transparent transparent #fff;margin-left:4px}
+.i-pause{display:none;gap:6px}
+.i-pause span{width:6px;height:18px;background:#fff;border-radius:2px;display:block}
+.i-pause.is-on,.i-play.is-off{display:none}
+.i-pause.is-on{display:flex}
+.tracks{margin-top:22px;display:grid;gap:10px;position:relative;z-index:1}
+.tracks b{display:block;height:14px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;position:relative}
+.tracks b::after{content:"";position:absolute;inset:0 auto 0 0;border-right:2px solid}
+.tracks .t1::after{width:60%;background:rgba(139,124,255,.42);border-color:var(--violet);animation:clipSlide 5.5s ease-in-out infinite}
+.tracks .t2::after{width:85%;left:5%;background:rgba(58,215,240,.28);border-color:var(--cyan);animation:clipSlide 6.8s ease-in-out infinite reverse}
+.tracks .t3::after{width:40%;left:20%;background:rgba(255,255,255,.1);border-color:transparent;animation:clipSlide 7.4s ease-in-out infinite}
+.tracks .playhead{
+  position:absolute;top:-4px;bottom:-4px;left:18%;width:2px;
+  background:linear-gradient(180deg,#fff,var(--cyan));
+  box-shadow:0 0 12px rgba(61,224,255,.55);
+  border-radius:2px;z-index:2;pointer-events:none;
+  animation:playheadScrub 4.8s ease-in-out infinite;
+}
+@keyframes clipSlide{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(8%)}
+}
+@keyframes playheadScrub{
+  0%{left:8%;opacity:.7}
+  50%{left:72%;opacity:1}
+  100%{left:8%;opacity:.7}
+}
+.float-chip{
+  position:absolute;bottom:-18px;left:-12px;z-index:2;
+  padding:14px 16px;border-radius:14px;
+  background:rgba(16,18,24,.88);backdrop-filter:blur(20px);
+  border:1px solid var(--line-strong);
+  box-shadow:0 20px 40px -12px rgba(5,6,10,.55),0 0 24px rgba(58,215,240,.08);
+  animation:floaty 4.5s ease-in-out infinite;
+}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.float-chip .lbl{font-size:9px;color:rgba(255,255,255,.42);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.float-chip .row{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.float-chip .live{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 12px rgba(74,222,128,.7)}
+
+@media(max-width:1020px){
+  .hero{grid-template-columns:1fr;gap:48px;padding-top:12px}
+  .preview-col{justify-content:center}
+  .float-chip{left:8px;bottom:-12px}
+}
+
+/* Mini grid — same charcoal stage */
+.mini-grid{
+  position:relative;z-index:10;
+  border-top:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);
+  padding:64px 0;
+}
+.mini-grid .inner{
+  width:min(100% - 48px,var(--max));margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+}
+.mini-grid h3{
+  font-family:var(--display);font-size:14px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;
+}
+.mini-grid p{color:var(--muted);font-size:14.5px;font-weight:400;line-height:1.7}
+.mini-grid .beta-whisper,
+.final-cta .beta-whisper,
+.site-footer .beta-whisper{
+  color:var(--dim);font-size:11px;font-weight:500;letter-spacing:.02em;text-transform:none;
+}
+
+/* Chapter strip */
+.chnav{
+  position:sticky;top:0;z-index:25;
+  background:rgba(3,2,8,.94);backdrop-filter:blur(22px) saturate(130%);
+  border-bottom:1px solid var(--line);
+}
+.chnav-inner{
+  width:min(100% - 32px,var(--max));margin:0 auto;
+  display:flex;align-items:center;gap:18px;padding:14px 0;overflow:auto;
+  scrollbar-width:none;
+}
+.chnav-inner::-webkit-scrollbar{display:none}
+.chnav .lbl{flex:none;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.chnav a{
+  flex:none;text-decoration:none;color:var(--muted);
+  font-size:12px;font-weight:600;padding:8px 12px;border-radius:8px;white-space:nowrap;
+  transition:background .2s,color .2s;
+}
+.chnav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+
+/* Feature showcases */
+.features-band{position:relative;z-index:10;background:transparent}
+.feat-intro{
+  padding:96px 0 28px;text-align:center;
+}
+.feat-intro .kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--violet);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;
+}
+.feat-intro .kicker::before,.feat-intro .kicker::after{content:"";width:28px;height:1px;background:rgba(139,124,255,.45)}
+.feat-intro h2{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(2rem,4.5vw,3.5rem);letter-spacing:-.04em;line-height:1.04;margin-bottom:14px;
+  font-optical-sizing:auto;
+}
+.feat-intro h2 em{font-family:var(--serif);font-style:italic;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+.feat-intro p{color:var(--muted);max-width:34rem;margin:0 auto;font-size:1.05rem;font-weight:300;line-height:1.65}
+
+.showcase{padding:88px 0;border-bottom:1px solid var(--line)}
+.showcase-row{display:grid;grid-template-columns:.82fr 1.28fr;gap:48px;align-items:center}
+.showcase-row.flip{grid-template-columns:1.28fr .82fr}
+.showcase-row.flip .visual{order:-1}
+.kicker-line{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--violet);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;
+}
+.kicker-line::before{content:"";width:18px;height:1px;background:currentColor}
+.showcase h3{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(1.7rem,3vw,2.35rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:16px;
+  font-optical-sizing:auto;
+}
+.showcase .copy p{color:var(--muted);font-size:15.5px;line-height:1.75;max-width:28rem;margin-bottom:18px;font-weight:300}
+.showcase .note{font-size:13px;color:var(--dim);border-top:1px solid var(--line);padding-top:14px;max-width:28rem}
+.visual{
+  position:relative;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line-strong);
+  box-shadow:0 36px 80px -24px rgba(5,6,10,.6), 0 0 36px -16px rgba(58,215,240,.08);
+  background:var(--bg-panel);
+  width:100%;
+  max-width:min(100%,920px);
+  margin-inline:auto;
+  transform:scale(1.02);
+  transform-origin:center center;
+}
+.visual img,.visual video{width:100%;height:auto;display:block;transform:scale(1.001);transition:transform 1.1s var(--ease)}
+.showcase:hover .visual img,.showcase:hover .visual video{transform:scale(1.025)}
+.visual video{object-fit:cover;background:#000;aspect-ratio:16/9}
+.visual .corner{position:absolute;width:24px;height:24px;pointer-events:none;z-index:2}
+.visual .c1{top:0;left:0;border-top:2px solid var(--violet);border-left:2px solid var(--violet);border-radius:18px 0 0 0}
+.visual .c2{right:0;bottom:0;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);border-radius:0 0 18px 0}
+@media(max-width:900px){
+  .showcase-row,.showcase-row.flip{grid-template-columns:1fr;gap:28px}
+  .showcase-row.flip .visual{order:0}
+  .visual{transform:none;max-width:100%}
+  .glass-card{max-width:100%;padding:18px}
+}
+
+/* Reveal on scroll — match hero softness */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 1.05s var(--ease-soft),transform 1.05s var(--ease-soft)}
+.reveal.in{opacity:1;transform:none}
+
+/* Full capability matrix */
+.matrix{padding:100px 0;border-bottom:1px solid var(--line)}
+.matrix-head{text-align:center;margin-bottom:48px}
+.matrix-head h2{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.02em;margin-bottom:12px;
+}
+.matrix-head p{color:var(--muted);max-width:32rem;margin:0 auto;font-weight:300}
+.matrix-groups{display:grid;gap:28px}
+.matrix-group{
+  border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+  box-shadow:0 20px 48px -24px rgba(5,6,10,.4);
+}
+.matrix-group header{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding:20px 24px;border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.015);
+}
+.matrix-group header h3{font-family:var(--display);font-size:1.05rem;font-weight:700;letter-spacing:.02em}
+.matrix-group header span{font-size:11px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.feat-list{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  list-style:none;padding:8px;
+}
+.feat-list li{
+  padding:18px 18px;border-radius:14px;
+  transition:background .25s;
+}
+.feat-list li:hover{background:rgba(255,255,255,.035)}
+.feat-list strong{
+  display:block;font-size:14px;font-weight:650;margin-bottom:6px;letter-spacing:.01em;
+}
+.feat-list span{display:block;color:var(--muted);font-size:13px;line-height:1.55;font-weight:300}
+@media(max-width:720px){.feat-list{grid-template-columns:1fr}}
+
+/* Formats */
+.formats{padding:88px 0;background:rgba(255,255,255,.015);border-bottom:1px solid var(--line)}
+.formats h2{
+  font-family:var(--display);text-align:center;
+  font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:700;margin-bottom:40px;letter-spacing:-.02em;
+}
+.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fbox{
+  text-align:center;padding:28px 18px;border-radius:16px;
+  border:1px solid var(--line);background:rgba(16,18,24,.65);
+  transition:border-color .25s,transform .3s var(--ease);
+}
+.fbox:hover{border-color:rgba(139,124,255,.4);transform:translateY(-3px)}
+.fbox .label{display:block;color:var(--dim);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.fbox .names{font-size:14px;font-weight:600;line-height:1.45}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.fgrid{grid-template-columns:1fr}}
+
+/* Final CTA */
+.final-cta{position:relative;z-index:10;padding:110px 0;text-align:center}
+.final-cta h2{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(2rem,4.5vw,3.1rem);letter-spacing:-.03em;margin-bottom:14px;
+}
+.final-cta p{color:var(--muted);max-width:28rem;margin:0 auto 32px;font-weight:300;font-size:1.05rem}
+.final-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* FAQ — AI / SEO extractable facts */
+.faq{padding:88px 0;border-bottom:1px solid var(--line)}
+.faq h2{
+  font-family:var(--display);text-align:center;font-weight:700;
+  font-size:clamp(1.7rem,3.2vw,2.4rem);letter-spacing:-.03em;margin-bottom:36px;
+}
+.faq-list{max-width:46rem;margin:0 auto;display:grid;gap:12px}
+.faq-item{
+  border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+  background:rgba(255,255,255,.02);
+}
+.faq-item h3{
+  font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:.01em;margin-bottom:8px;
+}
+.faq-item p{color:var(--muted);font-size:14.5px;line-height:1.65;font-weight:300;margin:0}
+
+/* Footer — Streamic OMS chrome */
+.site-footer{
+  position:relative;z-index:10;
+  border-top:1px solid var(--line);
+  padding:56px 0 28px;
+  background:rgba(1,1,5,.55);
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1.2fr 1fr;
+  gap:36px 28px;
+  padding-bottom:36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:20px;
+}
+.footer-brand{font-family:var(--display);font-size:1.05rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.footer-tagline{font-size:11px;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;font-weight:650;margin-bottom:12px}
+.footer-tag{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;max-width:22rem;margin-bottom:16px}
+.footer-social{display:flex;flex-wrap:wrap;gap:10px}
+.footer-social a{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;border:1px solid var(--line);
+  font-size:11px;font-weight:650;letter-spacing:.06em;text-decoration:none;color:var(--muted);
+  transition:border-color .2s,color .2s,background .2s;
+}
+.footer-social a:hover{color:#fff;border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.footer-social svg{fill:currentColor;flex:none}
+.footer-col h4{
+  font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.72);margin-bottom:14px;
+}
+.footer-col a,.footer-col span{
+  display:block;font-size:13px;color:var(--muted);text-decoration:none;line-height:1.55;margin-bottom:8px;font-weight:400;
+}
+.footer-col a:hover{color:#fff}
+.footer-col .mail{color:var(--cyan)}
+.footer-col .mail:hover{color:#fff}
+.footer-bottom{
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--dim);align-items:flex-start;
+}
+.footer-bottom .legal{max-width:42rem;line-height:1.55}
+@media(max-width:1100px){
+  .footer-grid{grid-template-columns:1fr 1fr 1fr}
+}
+@media(max-width:720px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .footer-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
-<body class="antialiased relative min-h-screen flex flex-col">
-  <!-- Atmospheric Background -->
-  <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-    <div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-900/20 blur-[120px]"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-violet-800/15 blur-[100px]"></div>
-    <div class="absolute top-[20%] right-[10%] w-[30%] h-[40%] rounded-full bg-cyan-900/15 blur-[80px]"></div>
+<body>
+  <div class="atmosphere" aria-hidden="true">
+    <div class="mesh"></div>
+    <span class="orb a"></span>
+    <span class="orb b"></span>
+    <span class="orb c"></span>
+    <span class="orb d"></span>
+    <div class="beam"></div>
+    <div class="horizon"></div>
+    <div class="grid"></div>
+    <div class="dot-field" aria-hidden="true"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
   </div>
 
-  <!-- Top Navigation -->
-  <nav class="relative z-20 flex justify-between items-center px-6 md:px-12 py-8">
-    <a href="index.html" class="flex items-center gap-4 group">
-      <div class="w-8 h-8 bg-gradient-btn rounded-lg shadow-lg group-hover:scale-105 transition-transform"></div>
-      <span class="text-xl font-black tracking-[0.15em] uppercase">Vistora</span>
+  <!-- ========== TOP: NAV + HERO + MINI GRID (preserved composition) ========== -->
+  <nav class="site-nav" aria-label="Primary">
+    <a href="#top" class="brand" id="top">
+      <img class="brand-mark" src="assets/vistora-icon.png" width="42" height="42" alt="">
+      <span class="brand-word">Vistora</span>
     </a>
-    <div class="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] font-bold text-white/50">
-      <a href="index.html" class="text-white">Home</a>
-      <a href="features.html" class="hover:text-white transition-colors">Features</a>
-      <a href="docs.html" class="hover:text-white transition-colors">Docs</a>
+    <div class="nav-links">
+      <a href="#top" class="is-active">Home</a>
+      <a href="#features">Features</a>
+      <a href="#export">Export</a>
+      <a href="https://www.thestreamic.in/contact.html" target="_blank" rel="noopener noreferrer">Contact</a>
     </div>
-    <a href="https://github.com/thestreamic/vistora/releases/latest" class="px-6 py-2.5 border border-white/20 rounded-full text-[11px] uppercase tracking-widest hover:bg-white hover:text-black transition-all font-bold">
-      Download
-    </a>
+    <a class="nav-cta" href="https://github.com/thestreamic/vistora/releases/latest">Download</a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navMob">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-mob" id="navMob">
+      <a href="#top" class="is-active">Home</a>
+      <a href="#features">Features</a>
+      <a href="#export">Export</a>
+      <a href="https://www.thestreamic.in/contact.html" target="_blank" rel="noopener noreferrer">Contact</a>
+      <a href="https://www.thestreamic.in/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+      <a href="https://www.thestreamic.in/terms.html" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+      <a class="nav-mob-cta" href="https://github.com/thestreamic/vistora/releases/latest">Download for Windows</a>
+    </div>
   </nav>
 
-  <!-- Main Hero Section -->
-  <main class="relative z-10 flex flex-col lg:flex-row gap-16 px-6 md:px-12 py-12 lg:py-20 items-center max-w-[1400px] mx-auto flex-1">
-    <!-- Left Content -->
-    <div class="flex-1 flex flex-col gap-6 lg:gap-8 items-start text-left w-full">
-      <h1 class="text-[56px] md:text-[80px] lg:text-[100px] leading-[0.9] font-black tracking-tighter uppercase">
-        Edit <br/>
-        <span class="text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.4);">Faster.</span> <br/>
-        Create <span class="text-gradient">Better.</span>
+  <main class="hero" id="hero">
+    <div class="hero-copy">
+      <div class="badge">Limited Creator Edition · Completely free <span class="beta-whisper">(beta)</span></div>
+      <p class="hero-diff">Local Windows NLE — reframe 16:9 to 9:16 in one click. No upload. No account.</p>
+      <h1>
+        <span class="ht-line"><span class="ht-inner">Edit</span></span>
+        <span class="ht-line"><span class="ht-inner ghost">Faster.</span></span>
+        <span class="ht-line"><span class="ht-inner">Create <span class="grad">Better.</span></span></span>
       </h1>
-      <p class="max-w-md text-lg md:text-xl text-white/50 leading-relaxed font-light">
-        The next-generation NLE designed for creators. Automatic reframe, caption-based editing, and noise cancellation — local, free, and blazingly fast.
+      <p class="hero-lead">
+        The next-generation NLE designed for creators. Automatic reframe, caption-based editing, and noise cancellation — <em>local</em>, and built for the cut.
       </p>
-      <div class="flex flex-col sm:flex-row gap-5 mt-4 w-full sm:w-auto">
-        <a href="https://github.com/thestreamic/vistora/releases/latest" class="px-8 py-4.5 bg-white text-black text-[13px] font-black uppercase tracking-[0.15em] hover:bg-violet-400 hover:text-white transition-colors shadow-[6px_6px_0px_0px_rgba(139,92,246,0.3)] w-full sm:w-auto text-center">
-          Download for Windows
-        </a>
-        <a href="features.html" class="px-8 py-4.5 border border-white/20 text-white text-[13px] font-black uppercase tracking-[0.15em] hover:bg-white/5 transition-colors w-full sm:w-auto text-center">
-          View Features
-        </a>
+      <div class="hero-actions">
+        <a class="btn-solid" href="https://github.com/thestreamic/vistora/releases/latest">Download for Windows</a>
+        <a class="btn-ghost" href="#features">View Features</a>
       </div>
-      
-      <div class="flex gap-10 mt-8 border-t border-white/10 pt-8 w-full">
-        <div>
-          <span class="block text-2xl font-black text-white mb-1">Free</span>
-          <span class="text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">No Watermark</span>
-        </div>
-        <div>
-          <span class="block text-2xl font-black text-white mb-1">Local</span>
-          <span class="text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">100% Private</span>
-        </div>
-        <div>
-          <span class="block text-2xl font-black text-white mb-1">CPU</span>
-          <span class="text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">No GPU Needed</span>
-        </div>
+      <div class="hero-stats">
+        <div><strong>Creators</strong><span>Limited free edition</span></div>
+        <div><strong>Local</strong><span>On your device</span></div>
+        <div><strong>Export</strong><span>Hardware when available</span></div>
       </div>
     </div>
 
-    <!-- Right Preview Card (Glassmorphism) -->
-    <div class="flex-1 w-full relative flex justify-center lg:justify-end">
-      <div class="w-full max-w-[640px] glass-card rounded-2xl p-5 sm:p-7 relative group">
-        <!-- Mock Editor Interface -->
-        <div class="flex flex-col h-full">
-          <div class="flex justify-between items-center mb-5">
-            <div class="flex gap-2">
-              <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
-            </div>
-            <div class="text-[10px] text-white/30 font-mono tracking-widest uppercase">vistora_project_v1.proj</div>
-          </div>
-          
-          <!-- Floating Video Canvas -->
-          <div class="relative w-full aspect-video bg-black/80 rounded-xl overflow-hidden border border-white/5 shadow-inner group/video">
-            <img class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" id="vHeroPoster" src="assets/vistora-reframe-poster.webp" alt="Vistora UI showing 9:16 reframe">
-            <video class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" id="vHeroVideo" autoplay muted loop playsinline preload="auto">
-              <source src="assets/vistora-reframe.webm" type="video/webm">
-            </video>
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
-
-            <button class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full glass-card flex items-center justify-center hover:scale-105 transition-all duration-300 z-10 border-white/20 opacity-0 group-hover/video:opacity-100 focus-visible:opacity-100" id="vHeroPlayBtn" aria-label="Pause demo video">
-              <div class="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-white border-b-[8px] border-b-transparent ml-1 i-play hidden"></div>
-              <div class="flex gap-1.5 i-pause">
-                <div class="w-1.5 h-4 bg-white rounded-sm"></div>
-                <div class="w-1.5 h-4 bg-white rounded-sm"></div>
-              </div>
-            </button>
-          </div>
-
-          <!-- Timeline Tracks -->
-          <div class="mt-6 space-y-2.5">
-            <div class="h-4 bg-white/5 rounded flex overflow-hidden">
-                <div class="bg-violet-500/40 w-[60%] border-r-2 border-violet-400"></div>
-            </div>
-            <div class="h-4 bg-white/5 rounded flex overflow-hidden">
-                <div class="bg-cyan-500/30 w-[85%] border-r-2 border-cyan-400 ml-[5%]"></div>
-            </div>
-            <div class="h-4 bg-white/5 rounded flex overflow-hidden">
-                <div class="bg-white/10 w-[40%] ml-[20%]"></div>
-            </div>
-          </div>
+    <div class="preview-col">
+      <div class="glass-card">
+        <div class="glass-top">
+          <div class="dots" aria-hidden="true"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+          <div class="proj-name">vistora_project_v1.proj</div>
         </div>
-
-        <!-- Layered Floating Element -->
-        <div class="absolute -bottom-6 -left-4 sm:-left-8 p-4 glass-card rounded-xl shadow-2xl animate-pulse" style="animation-duration: 4s;">
-          <div class="text-[9px] text-white/40 uppercase tracking-[0.2em] mb-1.5">AI Engine</div>
-          <div class="flex items-center gap-2.5">
-            <div class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.6)]"></div>
-            <div class="text-[11px] font-bold uppercase tracking-widest text-white/90">Auto Reframe Active</div>
-          </div>
+        <div class="video-stage">
+          <img id="vHeroPoster" src="assets/vistora-reframe-poster.webp" alt="Vistora UI showing 9:16 reframe">
+          <video id="vHeroVideo" muted loop playsinline autoplay preload="auto">
+            <source src="assets/vistora-reframe.webm" type="video/webm">
+          </video>
+          <div class="veil"></div>
+          <button type="button" id="vHeroPlayBtn" aria-label="Play demo video">
+            <div class="i-play"></div>
+            <div class="i-pause"><span></span><span></span></div>
+          </button>
+        </div>
+        <div class="tracks" aria-hidden="true">
+          <span class="playhead"></span>
+          <b class="t1"></b><b class="t2"></b><b class="t3"></b>
+        </div>
+        <div class="float-chip">
+          <div class="lbl">Vertical Edit</div>
+          <div class="row"><span class="live"></span>Auto Reframe Active</div>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Features Mini-Grid -->
-  <section class="relative z-10 px-6 md:px-12 py-16 w-full border-t border-white/5 bg-white/[0.02]">
-    <div class="max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+  <section class="mini-grid" aria-label="Highlights">
+    <div class="inner">
       <div>
-        <h3 class="text-sm font-bold uppercase tracking-widest mb-3 text-white">Auto Reframe</h3>
-        <p class="text-white/40 text-sm font-light leading-relaxed">16:9 to 9:16 in one click. Drag to crop, keyframe movement, and export instantly.</p>
+        <h3>Auto Reframe</h3>
+        <p>16:9 to 9:16 in one click. Drag to crop, keyframe movement, and export instantly.</p>
       </div>
       <div>
-        <h3 class="text-sm font-bold uppercase tracking-widest mb-3 text-white">Caption Edit</h3>
-        <p class="text-white/40 text-sm font-light leading-relaxed">Transcribe and edit from text. Click any line to jump to that exact moment.</p>
+        <h3>Caption Edit</h3>
+        <p>Local transcription and script-based editing — click a line to jump and cut from dialogue.</p>
       </div>
       <div>
-        <h3 class="text-sm font-bold uppercase tracking-widest mb-3 text-white">Noise Cancel</h3>
-        <p class="text-white/40 text-sm font-light leading-relaxed">Clean up dialogue and reduce background noise, processed 100% locally.</p>
+        <h3>Noise Cancel</h3>
+        <p>Clean up dialogue and reduce background noise, processed locally on your device.</p>
       </div>
       <div>
-        <h3 class="text-sm font-bold uppercase tracking-widest mb-3 text-white">Free Forever</h3>
-        <p class="text-white/40 text-sm font-light leading-relaxed">No watermark, no subscription. Multi-track timeline with robust export options.</p>
+        <h3>Creator Edition</h3>
+        <p>Limited Creator Edition — completely free <span class="beta-whisper">(beta)</span>. No watermark. Multi-track timeline with robust export options.</p>
       </div>
     </div>
   </section>
 
-  <!-- Footer Info -->
-  <footer class="relative z-10 px-6 md:px-12 py-10 mt-auto border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 max-w-[1400px] mx-auto w-full">
-    <div class="flex gap-16">
-      <div>
-        <div class="text-[9px] text-white/30 uppercase tracking-[0.2em] mb-1.5">Created By</div>
-        <a href="https://thestreamic.in" class="text-[11px] font-bold uppercase tracking-[0.15em] hover:text-violet-400 transition-colors">The Streamic</a>
-      </div>
-      <div>
-        <div class="text-[9px] text-white/30 uppercase tracking-[0.2em] mb-1.5">Release Status</div>
-        <div class="text-[11px] font-bold uppercase tracking-[0.15em] text-cyan-400">Public Beta</div>
-      </div>
+  <!-- ========== MERGED FEATURES (from features.html + full product surface) ========== -->
+  <div class="chnav" id="features">
+    <div class="chnav-inner">
+      <span class="lbl">Jump to</span>
+      <a href="#reframe">Reframe</a>
+      <a href="#captions">Captions</a>
+      <a href="#noise">Noise</a>
+      <a href="#titles">Titles</a>
+      <a href="#toolset">Toolset</a>
+      <a href="#export">Export</a>
     </div>
-    <div class="flex gap-8 text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">
-      <a href="privacy.html" class="hover:text-white transition-colors">Privacy</a>
-      <a href="terms.html" class="hover:text-white transition-colors">Terms</a>
-      <span>&copy; 2026 Vistora</span>
+  </div>
+
+  <div class="features-band">
+    <div class="feat-intro wrap reveal">
+      <div class="kicker">Product</div>
+      <h2>Everything Vistora <em>does right now</em></h2>
+      <p>Beta v1.5.0 — every capability below ships today. Local processing. No upload. Built for social and long-form creators.</p>
+    </div>
+
+    <section class="showcase" id="reframe">
+      <div class="wrap showcase-row reveal">
+        <div class="copy">
+          <div class="kicker-line">Reframe</div>
+          <h3>16:9 to 9:16 automatic reframe</h3>
+          <p>Reframe horizontal footage to vertical in one click. Drag to choose the crop position, keyframe it if the shot moves, then export — no duplicate timeline required.</p>
+          <div class="note">Shown: trimmed clip of the live 9:16 reframe over horizontal footage.</div>
+        </div>
+        <div class="visual">
+          <div class="corner c1"></div><div class="corner c2"></div>
+          <video muted loop playsinline autoplay preload="metadata" aria-label="16:9 to 9:16 automatic reframe demo">
+            <source src="assets/vistora-reframe-9x16.webm" type="video/webm">
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="captions">
+      <div class="wrap showcase-row flip reveal">
+        <div class="copy">
+          <div class="kicker-line">Script-Based Editing</div>
+          <h3>Edit from the transcript</h3>
+          <p>Local transcription with script-based editing — click any line to jump the playhead, then mark, subclip, or insert from the dialogue instead of scrubbing a waveform. Review the transcript before you publish.</p>
+          <div class="note">Shown: Script panel with timecoded transcript and click-to-jump navigation.</div>
+        </div>
+        <div class="visual">
+          <div class="corner c1"></div><div class="corner c2"></div>
+          <img src="assets/ug-transcribe.png" width="1200" height="750" loading="lazy" alt="Vistora Script panel and local transcription">
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="noise">
+      <div class="wrap showcase-row reveal">
+        <div class="copy">
+          <div class="kicker-line">Noise Cancellation</div>
+          <h3>Clean up dialogue, locally</h3>
+          <p>Reduce background noise in your audio. Processing runs on your device — nothing is uploaded to enhance a clip.</p>
+          <div class="note">Shown: Voice enhance / Dialogue Studio with local processing.</div>
+        </div>
+        <div class="visual">
+          <div class="corner c1"></div><div class="corner c2"></div>
+          <img src="assets/ug-voice-enhance.png" width="1200" height="750" loading="lazy" alt="Vistora voice enhance dialogue studio">
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="titles">
+      <div class="wrap showcase-row flip reveal">
+        <div class="copy">
+          <div class="kicker-line">Titles</div>
+          <h3>Simple titles</h3>
+          <p>Straightforward title templates you can drop onto the canvas and adjust. Not a motion-graphics suite — built for getting text on screen quickly.</p>
+          <div class="note">Shown: Title Studio with templates and inspector.</div>
+        </div>
+        <div class="visual">
+          <div class="corner c1"></div><div class="corner c2"></div>
+          <img src="assets/ug-titles.png" width="1200" height="750" loading="lazy" alt="Vistora Title Studio templates">
+        </div>
+      </div>
+    </section>
+
+    <section class="matrix" id="toolset">
+      <div class="wrap">
+        <div class="matrix-head reveal">
+          <div class="kicker-line" style="justify-content:center">Full toolset</div>
+          <h2>Every capability, highlighted</h2>
+          <p>From timeline craft to Fast Export — the complete Vistora surface in one place.</p>
+        </div>
+
+        <div class="matrix-groups">
+          <article class="matrix-group reveal">
+            <header><h3>Creative essentials</h3><span>From features.html</span></header>
+            <ul class="feat-list">
+              <li><strong>Simple transitions</strong><span>Fifteen production templates between clips — dissolves, wipes, slides, zooms, and more.</span></li>
+              <li><strong>One-click looks</strong><span>Warm, Cool, Moody, and Vintage color looks for fast grade direction.</span></li>
+              <li><strong>Clip effects</strong><span>Blur, Glow, Shake, Vibrance, and Vignette — with per-effect amount controls.</span></li>
+              <li><strong>Transform &amp; motion</strong><span>Scale, position, and rotation; PiP presets; Ken Burns zoom and pan.</span></li>
+              <li><strong>Stickers &amp; graphics</strong><span>Social stickers (Subscribe, Thumbs Up, Bell, Arrow) drag onto V1/V2.</span></li>
+              <li><strong>Multi-track timeline</strong><span>Video, audio, and title lanes with trim, split, ripple, and undo/redo.</span></li>
+              <li><strong>Screen recording</strong><span>Capture your display straight into the project bin.</span></li>
+              <li><strong>Screen + webcam PiP</strong><span>Composite screen and camera together with picture-in-picture.</span></li>
+              <li><strong>Voice-over</strong><span>Record narration onto the timeline at the playhead.</span></li>
+              <li><strong>Thumbnail snapshots</strong><span>Grab a still from the Program monitor for thumbnails and covers.</span></li>
+              <li><strong>Burn-in captions</strong><span>Embed generated subtitles into preview and export.</span></li>
+            </ul>
+          </article>
+
+          <article class="matrix-group reveal">
+            <header><h3>Edit craft</h3><span>Timeline &amp; monitors</span></header>
+            <ul class="feat-list">
+              <li><strong>Source / Program monitors</strong><span>Mark sync, still-frame open, and dual-monitor workflow.</span></li>
+              <li><strong>Insert · Overwrite · Extract</strong><span>V / B / X editing with Mark In–Out extract and ripple close.</span></li>
+              <li><strong>J / K / L shuttle</strong><span>Professional reverse, stop, and forward playback control.</span></li>
+              <li><strong>Blade &amp; selection</strong><span>C blade, A selection, lasso multi-select, and ripple delete.</span></li>
+              <li><strong>Clip speed</strong><span>Constant retimes from 0.25× to 4× with pitch tracking.</span></li>
+              <li><strong>Sequence bin</strong><span>Sequences live in Your media — duplicate a cut without leaving the bin.</span></li>
+              <li><strong>Markers &amp; snap</strong><span>Sequence markers, snap, and keyboard-driven navigation.</span></li>
+              <li><strong>Shortcut reference</strong><span>In-app keyboard map from the Timeline toolbar — every cut key in one place.</span></li>
+              <li><strong>Fullscreen viewer</strong><span>Player fullscreen for focused review (toolbar or F11).</span></li>
+              <li><strong>Autosave &amp; projects</strong><span>`.vistora.json` save/load with background autosave.</span></li>
+              <li><strong>Smart Relink</strong><span>Reconnect offline media when paths move.</span></li>
+            </ul>
+          </article>
+
+          <article class="matrix-group reveal">
+            <header><h3>Audio &amp; script</h3><span>Local intelligence</span></header>
+            <ul class="feat-list">
+              <li><strong>Clip waveform</strong><span>Show audio waveforms on the timeline for visual trimming and level cues.</span></li>
+              <li><strong>Fade in / Fade out + pan</strong><span>Millisecond fades, stereo pan, gain, mute, and interactive envelope handles.</span></li>
+              <li><strong>Local Whisper STT</strong><span>On-device speech-to-text with Import / Export `.srt`.</span></li>
+              <li><strong>Script panel</strong><span>Jump, mark range, make subclip, and insert from dialogue lines.</span></li>
+              <li><strong>Dialogue enhance</strong><span>Local voice enhance / denoise — fully offline.</span></li>
+              <li><strong>Audio envelopes</strong><span>Gain shaping, ducking, and detachable audio lanes.</span></li>
+            </ul>
+          </article>
+
+          <article class="matrix-group reveal" id="performance">
+            <header><h3>Performance &amp; delivery</h3><span>Ship-ready</span></header>
+            <ul class="feat-list">
+              <li><strong>Fast Export</strong><span>Video-first native path with adaptive hardware ranking.</span></li>
+              <li><strong>Hardware encode</strong><span>NVENC → QSV → AMF → VideoToolbox → libx264 fallback.</span></li>
+              <li><strong>Social profiles</strong><span>YouTube, Shorts, Instagram Reels/Feed, and Facebook delivery presets.</span></li>
+              <li><strong>Loudness normalize</strong><span>Social delivery applies YouTube-class loudnorm (−14 LUFS) on applicable export profiles.</span></li>
+              <li><strong>NLE interchange</strong><span>FCPXML, Premiere XML, and EDL for Premiere, Resolve, and FCP.</span></li>
+              <li><strong>Preview Render</strong><span>Cached WebM preview for smoother scrubbing of heavy stacks.</span></li>
+              <li><strong>Reveal in Explorer</strong><span>Jump from clip or export straight to the file on disk.</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="formats" id="export">
+      <div class="wrap reveal">
+        <h2>Export &amp; format support</h2>
+        <div class="fgrid">
+          <div class="fbox"><span class="label">Vertical presets</span><span class="names">Shorts, Instagram Reels, Instagram Feed</span></div>
+          <div class="fbox"><span class="label">Long-form</span><span class="names">YouTube 1080p / 4K, Facebook</span></div>
+          <div class="fbox"><span class="label">Loudness</span><span class="names">−14 LUFS loudnorm on social delivery profiles</span></div>
+          <div class="fbox"><span class="label">Editor interchange</span><span class="names">FCP XML, Adobe XML, EDL</span></div>
+          <div class="fbox"><span class="label">Subtitles</span><span class="names">SRT export, TXT export, embedded burn-in</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap reveal">
+        <h2 id="faq-title">Frequently asked questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3>What is Vistora?</h3>
+            <p>Vistora is a local Windows video editor (NLE) for creators. It includes automatic 16:9→9:16 reframe, caption-based editing, noise cancellation, and Fast Export — without uploading your media.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Is Vistora free?</h3>
+            <p>Yes. The Limited Creator Edition is completely free <span class="beta-whisper">(beta)</span> — no account, no watermark, runs on your computer.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Does Vistora work offline?</h3>
+            <p>Yes. Editing, transcription, dialogue enhance, and export are designed to run locally on your device. An internet connection is only needed to download the app.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Is Vistora good for YouTube Shorts and Reels?</h3>
+            <p>Yes. One-click vertical reframe plus social export presets (Shorts, Instagram Reels/Feed, YouTube, Facebook) with loudness normalize on applicable profiles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="wrap reveal">
+        <h2>Try it yourself</h2>
+        <p>Limited Creator Edition — completely free <span class="beta-whisper">(beta)</span>. No account, no watermark, everything local.</p>
+        <div class="final-ctas">
+          <a class="btn-solid" href="https://github.com/thestreamic/vistora/releases/latest">Download for Windows</a>
+          <a class="btn-ghost" href="#features">Back to features</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">The Streamic</div>
+          <div class="footer-tagline">Media &amp; Broadcast IT Analysis</div>
+          <p class="footer-tag">Independent broadcast &amp; streaming technology journalism. Vistora is built by The Streamic for creators who cut locally.</p>
+          <div class="footer-social">
+            <a href="https://twitter.com/thestreamic" target="_blank" rel="noopener noreferrer">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              @thestreamic
+            </a>
+            <a href="https://www.linkedin.com/company/thestreamic" target="_blank" rel="noopener noreferrer">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              TheStreamic
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Vistora</h4>
+          <a href="#features">Features</a>
+          <a href="#export">Export</a>
+          <a href="https://github.com/thestreamic/vistora/releases/latest">Download</a>
+        </div>
+        <div class="footer-col">
+          <h4>The Streamic Coverage</h4>
+          <a href="https://www.thestreamic.in/ai-post-production.html" target="_blank" rel="noopener noreferrer">AI in Broadcasting</a>
+          <a href="https://www.thestreamic.in/howto.html" target="_blank" rel="noopener noreferrer">How-To Guides</a>
+          <a href="https://www.thestreamic.in/post-production-workflows.html" target="_blank" rel="noopener noreferrer">Post Production Workflows</a>
+          <a href="https://www.thestreamic.in/insights.html" target="_blank" rel="noopener noreferrer">Expert Insights</a>
+          <a href="https://www.thestreamic.in/editorsdesk.html" target="_blank" rel="noopener noreferrer">Editorial Insights</a>
+        </div>
+        <div class="footer-col">
+          <h4>Dublin, Ireland</h4>
+          <a class="mail" href="mailto:thestreamic@gmail.com">thestreamic@gmail.com</a>
+          <span>Adamstown, Lucan</span>
+          <span>Dublin, Ireland</span>
+          <a href="https://www.thestreamic.in/" target="_blank" rel="noopener noreferrer">thestreamic.in</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="legal">Limited Creator Edition — completely free <span class="beta-whisper">(beta)</span>. Runs on your computer. No uploading, no watermark. Vistora and The Streamic trademarks are used under The Streamic.</span>
+        <span>&copy; 2026 Vistora · The Streamic · thestreamic.in</span>
+      </div>
     </div>
   </footer>
 
@@ -205,33 +1197,106 @@
 
   function activateVideo(){
     if(video.getAttribute('preload')!=='auto'){video.setAttribute('preload','auto');video.load();}
-    video.classList.replace('opacity-0', 'opacity-100');
-    poster.classList.replace('opacity-100', 'opacity-0');
-    video.play().catch(function(){});
+    video.style.opacity='1';
+    poster.style.opacity='0';
+    return video.play();
   }
-  
+
   function setButtonState(playing){
-    if(playing) {
-        iconPlay.classList.add('hidden');
-        iconPause.classList.remove('hidden');
-        playBtn.classList.add('opacity-0');
-        playBtn.classList.remove('opacity-100');
+    if(playing){
+      iconPlay.style.display='none';
+      iconPause.style.display='flex';
+      playBtn.classList.add('auto-on');
+      playBtn.setAttribute('aria-label','Pause demo video');
     } else {
-        iconPlay.classList.remove('hidden');
-        iconPause.classList.add('hidden');
-        playBtn.classList.remove('opacity-0');
-        playBtn.classList.add('opacity-100');
+      iconPlay.style.display='block';
+      iconPause.style.display='none';
+      playBtn.classList.remove('auto-on');
+      playBtn.setAttribute('aria-label','Play demo video');
     }
   }
-  
+
+  function tryAutoplay(){
+    activateVideo().then(function(){
+      setButtonState(true);
+    }).catch(function(){
+      // Autoplay blocked — keep poster + play control visible.
+      video.style.opacity='0';
+      poster.style.opacity='1';
+      setButtonState(false);
+    });
+  }
+
   playBtn.addEventListener('click',function(){
-    if(video.classList.contains('opacity-0')){activateVideo();setButtonState(true);return;}
-    if(video.paused){video.play();setButtonState(true);}else{video.pause();setButtonState(false);}
+    if(parseFloat(getComputedStyle(video).opacity) < 0.5){
+      activateVideo().then(function(){ setButtonState(true); }).catch(function(){});
+      return;
+    }
+    if(video.paused){
+      video.play().then(function(){ setButtonState(true); }).catch(function(){});
+    } else {
+      video.pause();
+      setButtonState(false);
+    }
   });
 
-  // Handle initial state and external pauses
-  video.addEventListener('play', function() { setButtonState(true); });
-  video.addEventListener('pause', function() { setButtonState(false); });
+  if(document.readyState==='complete') tryAutoplay();
+  else window.addEventListener('load', tryAutoplay);
+
+  // Mobile nav (Streamic OMS pattern)
+  var navToggle=document.querySelector('.nav-toggle');
+  var navMob=document.getElementById('navMob');
+  if(navToggle && navMob){
+    navToggle.addEventListener('click',function(){
+      var open=navMob.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('menu-open', open);
+    });
+    navMob.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        if(a.getAttribute('href') && a.getAttribute('href').charAt(0)==='#'){
+          navMob.classList.remove('open');
+          navToggle.setAttribute('aria-expanded','false');
+          document.body.classList.remove('menu-open');
+        }
+      });
+    });
+  }
+
+  // Hero card glow follow (subtle)
+  var glass=document.querySelector('.glass-card');
+  if(glass && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)){
+    glass.addEventListener('pointermove',function(e){
+      glass.classList.add('is-hot');
+    });
+    glass.addEventListener('pointerleave',function(){
+      glass.classList.remove('is-hot');
+    });
+  }
+
+  // Hero entrance — delayed soft cadence (Maya / pro NLE feel)
+  var hero=document.getElementById('hero');
+  var heroCopy=document.querySelector('.hero-copy');
+  function armHero(){
+    if(hero) hero.classList.add('is-in');
+    if(heroCopy) heroCopy.classList.add('is-in');
+  }
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    armHero();
+  } else {
+    window.setTimeout(armHero, 280);
+  }
+
+  // Scroll reveal
+  var nodes=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    },{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    nodes.forEach(function(n){io.observe(n);});
+  } else {
+    nodes.forEach(function(n){n.classList.add('in');});
+  }
 })();
 </script>
 </body>
