@@ -85,17 +85,18 @@
   font-display:swap;
 }
 :root{
-  /* Obsidian-violet stage — desaturated dark, not flat black — one elevated surface, one hero accent */
-  --bg:#0B0912;
-  --bg-panel:#18141F;
+  /* Twilight-violet stage — a real jewel-tone dusk, not black: deep plum ground, aurora glow, one hero accent */
+  --bg:#1B1233;
+  --bg-panel:#2A1B49;
   --ink:#FFFFFF;
-  --muted:rgba(220,224,236,.55);
-  --dim:rgba(220,224,236,.34);
-  --line:rgba(255,255,255,.065);
-  --line-strong:rgba(255,255,255,.12);
+  --muted:rgba(226,222,244,.58);
+  --dim:rgba(226,222,244,.36);
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(255,255,255,.14);
   --violet:#9B7BFF;
   --cyan:#3DE0FF;
   --crimson:#C43B5A;
+  --mint:#7CFFB2;
   --grad:linear-gradient(135deg,#7C5CFF 0%,#3DE0FF 55%,#7CFFB2 100%);
   --grad-text:linear-gradient(100deg,#F7F3FF 0%,#C4B0FF 36%,#9B7BFF 58%,#3DE0FF 100%);
   --display:"Bricolage Grotesque","Space Grotesk Local",system-ui,sans-serif;
@@ -104,13 +105,17 @@
   --ease:cubic-bezier(.22,1,.36,1);
   --ease-soft:cubic-bezier(.19,1,.22,1);
   --max:1520px;
-  --shade:rgba(11,9,18,.65);
+  --shade:rgba(27,18,51,.68);
 }
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
 body{
   font-family:var(--sans);
-  background:linear-gradient(180deg,#14101E 0%,#0B0912 45%,#060410 100%);
+  background:
+    radial-gradient(ellipse 95% 60% at 12% -8%, rgba(124,92,255,.38) 0%, transparent 55%),
+    radial-gradient(ellipse 85% 55% at 92% 4%, rgba(61,224,255,.20) 0%, transparent 52%),
+    radial-gradient(ellipse 70% 50% at 50% 105%, rgba(196,59,90,.16) 0%, transparent 60%),
+    linear-gradient(180deg,#241640 0%,#1B1233 42%,#140B26 100%);
   background-attachment:fixed;
   color:var(--ink);
   overflow-x:hidden;
@@ -134,7 +139,8 @@ img{max-width:100%;display:block}
   position:absolute;border-radius:50%;filter:blur(130px);
   animation:orbFloat 26s ease-in-out infinite;
 }
-.atmosphere .a{top:-16%;left:14%;width:58%;height:54%;background:rgba(155,123,255,.14);opacity:.4}
+.atmosphere .a{top:-16%;left:14%;width:58%;height:54%;background:rgba(155,123,255,.24);opacity:.55}
+.atmosphere .b{bottom:-14%;right:6%;width:52%;height:48%;background:rgba(61,224,255,.18);opacity:.5;animation-delay:-13s}
 .atmosphere .grid{
   position:absolute;inset:0;
   background-image:
@@ -161,7 +167,7 @@ img{max-width:100%;display:block}
 }
 .atmosphere .vignette{
   position:absolute;inset:0;
-  background:radial-gradient(ellipse 72% 66% at 50% 34%, transparent 22%, rgba(6,4,10,.55) 78%, rgba(4,3,8,.85) 100%);
+  background:radial-gradient(ellipse 74% 68% at 50% 32%, transparent 28%, rgba(20,11,38,.32) 80%, rgba(15,8,28,.5) 100%);
 }
 @keyframes orbFloat{
   0%,100%{transform:translate3d(0,0,0) scale(1)}
@@ -238,6 +244,9 @@ img{max-width:100%;display:block}
 }
 @media(max-width:820px){
   .site-nav{padding:20px 16px}
+}
+@media(max-width:480px){
+  .nav-cta{display:none}
 }
 
 /* HERO — DCC product composition */
@@ -636,16 +645,20 @@ img{max-width:100%;display:block}
 .matrix-head p{color:var(--muted);max-width:32rem;margin:0 auto;font-weight:300}
 .matrix-groups{display:grid;gap:28px}
 .matrix-group{
-  border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  --accent:var(--violet);
+  border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:20px;overflow:hidden;
   background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
   box-shadow:0 20px 48px -24px rgba(5,6,10,.4);
 }
+.matrix-group.mg-cyan{--accent:var(--cyan)}
+.matrix-group.mg-crimson{--accent:var(--crimson)}
+.matrix-group.mg-mint{--accent:var(--mint)}
 .matrix-group header{
   display:flex;align-items:baseline;justify-content:space-between;gap:16px;
   padding:20px 24px;border-bottom:1px solid var(--line);
   background:rgba(255,255,255,.015);
 }
-.matrix-group header h3{font-family:var(--display);font-size:1.05rem;font-weight:700;letter-spacing:.02em}
+.matrix-group header h3{font-family:var(--display);font-size:1.05rem;font-weight:700;letter-spacing:.02em;color:var(--accent)}
 .matrix-group header span{font-size:11px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 .feat-list{
   display:grid;grid-template-columns:repeat(2,1fr);
@@ -659,7 +672,12 @@ img{max-width:100%;display:block}
 .feat-list strong{
   display:block;font-size:14px;font-weight:650;margin-bottom:6px;letter-spacing:.01em;
 }
-.feat-list span{display:block;color:var(--muted);font-size:13px;line-height:1.55;font-weight:300}
+.feat-list strong::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);margin-right:8px;margin-bottom:1px;vertical-align:middle;
+  box-shadow:0 0 8px var(--accent);
+}
+.feat-list span{display:block;color:var(--muted);font-size:13px;line-height:1.55;font-weight:300;margin-left:14px}
 @media(max-width:720px){.feat-list{grid-template-columns:1fr}}
 
 /* Formats */
@@ -668,17 +686,24 @@ img{max-width:100%;display:block}
   font-family:var(--display);text-align:center;
   font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:700;margin-bottom:40px;letter-spacing:-.02em;
 }
-.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 .fbox{
+  --accent:var(--violet);
   text-align:center;padding:28px 18px;border-radius:16px;
-  border:1px solid var(--line);background:rgba(16,18,24,.65);
-  transition:border-color .25s,transform .3s var(--ease);
+  border:1px solid var(--line);border-top:2px solid var(--accent);
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  transition:border-color .25s,transform .3s var(--ease),box-shadow .3s var(--ease);
 }
-.fbox:hover{border-color:rgba(139,124,255,.4);transform:translateY(-3px)}
-.fbox .label{display:block;color:var(--dim);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.fbox:nth-child(2){--accent:var(--cyan)}
+.fbox:nth-child(3){--accent:var(--mint)}
+.fbox:nth-child(4){--accent:var(--crimson)}
+.fbox:nth-child(5){--accent:var(--violet)}
+.fbox:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 16px 32px -20px var(--accent)}
+.fbox .label{display:block;color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
 .fbox .names{font-size:14px;font-weight:600;line-height:1.45}
-@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.fgrid{grid-template-columns:1fr}}
+@media(max-width:1100px){.fgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.fgrid{grid-template-columns:1fr}}
 
 /* Final CTA */
 .final-cta{position:relative;z-index:10;padding:110px 0;text-align:center}
@@ -760,6 +785,7 @@ img{max-width:100%;display:block}
 <body>
   <div class="atmosphere" aria-hidden="true">
     <span class="orb a"></span>
+    <span class="orb b"></span>
     <div class="grid"></div>
     <div class="dot-field" aria-hidden="true"></div>
     <div class="grain"></div>
@@ -982,7 +1008,7 @@ img{max-width:100%;display:block}
             </ul>
           </article>
 
-          <article class="matrix-group reveal">
+          <article class="matrix-group reveal mg-cyan">
             <header><h3>Edit craft</h3><span>Timeline &amp; monitors</span></header>
             <ul class="feat-list">
               <li><strong>Source / Program monitors</strong><span>Mark sync, still-frame open, and dual-monitor workflow.</span></li>
@@ -999,7 +1025,7 @@ img{max-width:100%;display:block}
             </ul>
           </article>
 
-          <article class="matrix-group reveal">
+          <article class="matrix-group reveal mg-crimson">
             <header><h3>Audio &amp; script</h3><span>Local intelligence</span></header>
             <ul class="feat-list">
               <li><strong>Clip waveform</strong><span>Show audio waveforms on the timeline for visual trimming and level cues.</span></li>
@@ -1011,7 +1037,7 @@ img{max-width:100%;display:block}
             </ul>
           </article>
 
-          <article class="matrix-group reveal" id="performance">
+          <article class="matrix-group reveal mg-mint" id="performance">
             <header><h3>Performance &amp; delivery</h3><span>Ship-ready</span></header>
             <ul class="feat-list">
               <li><strong>Fast Export</strong><span>Video-first native path with adaptive hardware ranking.</span></li>
