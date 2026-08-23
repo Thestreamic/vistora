@@ -5,18 +5,19 @@
    Tokens mirror the inline theme used by index.html & features.html
    ────────────────────────────────────────────────────────────── */
 :root{
-  --bg:#0B0912;
-  --bg-panel:#18141F;
+  --bg:#1B1233;
+  --bg-panel:#2A1B49;
   --ink:#FFFFFF;
   --text:#FFFFFF;
-  --muted:rgba(220,224,236,.55);
-  --dim:rgba(220,224,236,.34);
-  --line:rgba(255,255,255,.065);
-  --line-strong:rgba(255,255,255,.12);
+  --muted:rgba(226,222,244,.58);
+  --dim:rgba(226,222,244,.36);
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(255,255,255,.14);
   --violet:#9B7BFF;
   --cyan:#3DE0FF;
   --crimson:#C43B5A;
   --amber:#F5C451;
+  --mint:#7CFFB2;
   --grad:linear-gradient(135deg,#7C5CFF 0%,#3DE0FF 55%,#7CFFB2 100%);
   --grad-text:linear-gradient(100deg,#F7F3FF 0%,#C4B0FF 36%,#9B7BFF 58%,#3DE0FF 100%);
   --display:"Bricolage Grotesque",system-ui,sans-serif;
@@ -30,7 +31,12 @@
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;
-  background:var(--bg);
+  background:
+    radial-gradient(ellipse 95% 60% at 12% -8%, rgba(124,92,255,.34) 0%, transparent 55%),
+    radial-gradient(ellipse 85% 55% at 92% 4%, rgba(61,224,255,.18) 0%, transparent 52%),
+    radial-gradient(ellipse 70% 50% at 50% 105%, rgba(196,59,90,.14) 0%, transparent 60%),
+    linear-gradient(180deg,#241640 0%,#1B1233 42%,#140B26 100%);
+  background-attachment:fixed;
   color:var(--ink);
   font-family:var(--sans);
   font-size:16px;
