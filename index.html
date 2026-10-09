@@ -86,8 +86,9 @@
 }
 :root{
   /* Twilight-violet stage — a real jewel-tone dusk, not black: deep plum ground, aurora glow, one hero accent */
-  --bg:#1B1233;
-  --bg-panel:#2A1B49;
+  --bg:#140C26;            /* deepened from #1B1233 */
+  --bg-deep:#0E0819;       /* darkest surface — mock/panel floor */
+  --bg-panel:#211540;      /* deepened from #2A1B49 */
   --ink:#FFFFFF;
   --muted:rgba(226,222,244,.58);
   --dim:rgba(226,222,244,.36);
@@ -105,7 +106,7 @@
   --ease:cubic-bezier(.22,1,.36,1);
   --ease-soft:cubic-bezier(.19,1,.22,1);
   --max:1520px;
-  --shade:rgba(27,18,51,.68);
+  --shade:rgba(20,12,38,.72);
 }
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
@@ -780,6 +781,62 @@ img{max-width:100%;display:block}
 @media(max-width:520px){
   .footer-grid{grid-template-columns:1fr}
 }
+
+/* ---- AI Editor rendered mock (no screenshot asset; drawn in CSS) ---- */
+.ai-mock{
+  width:100%;border-radius:16px;overflow:hidden;
+  background:linear-gradient(180deg,var(--bg-panel) 0%,var(--bg-deep) 100%);
+  border:1px solid var(--line-strong);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.05);
+  font-family:var(--sans);
+}
+.ai-mock-bar{
+  display:flex;align-items:center;gap:9px;padding:13px 16px;
+  border-bottom:1px solid var(--line);
+  font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.01em;
+  background:rgba(255,255,255,.02);
+}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--mint);
+  box-shadow:0 0 12px 2px rgba(124,255,178,.45);flex:0 0 auto;}
+.ai-mock-tag{
+  margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--cyan);border:1px solid rgba(61,224,255,.32);border-radius:999px;padding:3px 9px;
+  background:rgba(61,224,255,.07);
+}
+.ai-mock-body{padding:16px;display:flex;flex-direction:column;gap:11px;}
+.ai-bubble{border-radius:13px;padding:11px 14px;font-size:13.5px;line-height:1.5;max-width:92%;}
+.ai-bubble-user{
+  align-self:flex-end;color:#fff;
+  background:linear-gradient(135deg,#7C5CFF 0%,#9B7BFF 100%);
+  box-shadow:0 8px 22px -10px rgba(124,92,255,.8);
+}
+.ai-bubble-ai{
+  align-self:flex-start;width:100%;max-width:100%;
+  background:rgba(255,255,255,.045);border:1px solid var(--line);
+  color:var(--muted);display:flex;flex-direction:column;gap:7px;
+}
+.ai-bubble-ai strong{color:var(--ink);font-size:13.5px;font-weight:700;}
+.ai-cut{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
+  color:rgba(226,222,244,.72);
+  background:rgba(0,0,0,.28);border:1px solid var(--line);
+  border-radius:8px;padding:6px 10px;
+}
+.ai-actions{display:flex;gap:8px;margin-top:5px;}
+.ai-actions b{font-size:12px;font-weight:700;border-radius:9px;padding:8px 14px;}
+.ai-apply{background:var(--grad);color:#12091F;
+  box-shadow:0 8px 22px -12px rgba(61,224,255,.9);}
+.ai-cancel{border:1px solid var(--line-strong);color:var(--muted);}
+.ai-mock-input{
+  margin:0 16px 16px;padding:11px 14px;border-radius:11px;
+  border:1px solid var(--line-strong);background:rgba(0,0,0,.32);
+  color:var(--dim);font-size:13px;
+}
+@media (max-width:720px){
+  .ai-bubble,.ai-bubble-ai{max-width:100%;}
+  .ai-cut{font-size:10.5px;}
+}
+
 </style>
 </head>
 <body>
@@ -963,7 +1020,38 @@ img{max-width:100%;display:block}
       </div>
     </section>
 
-    <section class="showcase" id="titles">
+    <section class="showcase" id="ai-editor">
+      <div class="wrap showcase-row reveal">
+        <div class="copy">
+          <div class="kicker-line">AI Editor</div>
+          <h3>Cut the dead air by asking</h3>
+          <p>Select a clip and say what you want. Vistora finds every pause, shows you exactly where they are, and changes nothing until you press Apply. One undo takes the whole edit back.</p>
+          <p>Pause detection reads the audio itself rather than guessing from a transcript — so it works with no AI model downloaded, and it can't misread you.</p>
+          <div class="note">Opens from the AI button on the timeline, or Tools → AI Editor.</div>
+        </div>
+        <div class="visual">
+          <div class="corner c1"></div><div class="corner c2"></div>
+          <div class="ai-mock" role="img" aria-label="Vistora AI Editor chat panel listing four detected pauses with Apply and Cancel buttons">
+            <div class="ai-mock-bar"><span class="ai-dot"></span>Vistora AI Editor<span class="ai-mock-tag">Local</span></div>
+            <div class="ai-mock-body">
+              <div class="ai-bubble ai-bubble-user">remove pauses longer than 1.5 seconds</div>
+              <div class="ai-bubble ai-bubble-ai">
+                <strong>4 pauses over 1.5s — 9.4s total</strong>
+                <span class="ai-cut">1. 00:12.480 – 00:14.703 &nbsp;(2.22s)</span>
+                <span class="ai-cut">2. 00:31.104 – 00:33.958 &nbsp;(2.85s)</span>
+                <span class="ai-cut">3. 01:02.716 – 01:04.570 &nbsp;(1.85s)</span>
+                <span class="ai-cut">4. 01:44.543 – 01:47.020 &nbsp;(2.48s)</span>
+                <span class="ai-actions"><b class="ai-apply">Apply 4 cuts</b><b class="ai-cancel">Cancel</b></span>
+              </div>
+            </div>
+            <div class="ai-mock-input">Ask Vistora AI…</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+<section class="showcase" id="titles">
       <div class="wrap showcase-row flip reveal">
         <div class="copy">
           <div class="kicker-line">Titles</div>
